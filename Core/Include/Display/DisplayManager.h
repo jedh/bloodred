@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Display\Window.h"
+#include <memory>
 
 namespace BRCore
 {

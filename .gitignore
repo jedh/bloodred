@@ -29,3 +29,10 @@
 
 # Visual Studio ish
 *.sdf
+
+# Visual Studio cache directory
+.vs/
+
+x64/
+BloodRed/x64
+Core/x64

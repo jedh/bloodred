@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "Render\IRenderer.h"
+#include "Display/\DisplayManager.h"
 
 namespace BRCore
 {
@@ -9,7 +10,7 @@ namespace BRCore
     public:                
         static RenderManager&   Instance() { return m_instance; }
 
-        bool                    StartUp();
+        bool                    StartUp(DisplayManager& displayManager);
         void                    ShutDown();
 
         void                    Draw(); // Test function.

@@ -13,8 +13,8 @@ namespace BRCore
         void                Run();
 
     private:
-        Timer*              m_timer;
-        RenderManager&      m_renderManager;        
-        InputManager&       m_inputManager;
+        std::unique_ptr<Timer>          m_timer;
+        RenderManager&                  m_renderManager;        
+        InputManager&                   m_inputManager;
     };
 }

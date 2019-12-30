@@ -1,5 +1,6 @@
 #include "Input\InputManager.h"
 #include <iostream>
+#include <SDL.h>
 
 namespace BRCore
 {
@@ -15,14 +16,19 @@ namespace BRCore
 
     }
     
-    int InputManager::ProcessInput()
+    std::tuple<int, SDL_Keycode> InputManager::ProcessInput()
     {
         int inputCode = SDL_PollEvent(&m_inputEvent);
+        
         if ( inputCode != 0 )
         {
             // Do any special handling here.
+            if (m_inputEvent.type == SDL_KEYUP && m_inputEvent.key.keysym.sym == SDLK_ESCAPE)
+            {
+                printf("quit\n");
+            }
         }
 
-        return m_inputEvent.type;
+        return std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);
     }
 }

@@ -5,28 +5,37 @@
 using namespace std::chrono;
 
 namespace BRCore
-{        
-    void GameLoop::Run()
-    {
-        bool isRunning = true;                
-        m_timer = new Timer();
-        float deltaTime = 0;
+{
+	void GameLoop::Run()
+	{
+		bool isRunning = true;
+		//m_timer = new Timer();
+		m_timer = std::make_unique<Timer>();
+		float deltaTime = 0;
 
-        SDL_Event eventHandler;
+		SDL_Event eventHandler;
 
-        while ( isRunning )
-        {
-            deltaTime = m_timer->GetDelta();
+		while (isRunning)
+		{
+			deltaTime = m_timer->GetDelta();
 
-            // Process input.            
-            if ( m_inputManager.ProcessInput() == SDL_QUIT )
-            {
-                isRunning = false;
-            }
+			auto input = m_inputManager.ProcessInput();
 
-            // Update game/scene/physics.
+			// Process input.            
+			if (std::get<0>(input) == SDL_QUIT)
+			{
+				isRunning = false;
+			}
+			else if (std::get<0>(input) == SDL_KEYUP &&
+				std::get<1>(input) == SDLK_ESCAPE)
+			{
+				// This is just temporary for now.
+				isRunning = false;
+			}
 
-            m_renderManager.Draw();
-        }
-    }
+			// Update game/scene/physics.
+
+			m_renderManager.Draw();
+		}
+	}
 }

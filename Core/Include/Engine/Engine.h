@@ -22,9 +22,9 @@ namespace BRCore
         void                Run();
 
     private:
-        DisplayManager*     m_displayManager;
-        RenderManager*      m_renderManger;
-        InputManager*       m_inputManager;
+        std::shared_ptr<DisplayManager>     m_displayManager;
+        std::shared_ptr<RenderManager>      m_renderManger;
+        std::shared_ptr<InputManager>       m_inputManager;
         GameLoop*           m_gameLoop;
     };
 }
