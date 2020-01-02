@@ -19,10 +19,10 @@ namespace BRCore
 		m_renderManger = nullptr;
 	}
 
-	int Engine::Start()
+	int Engine::Start(int screenWidth, int screenHeight)
 	{
 		// Order matters!
-		if (!m_displayManager->StartUp() ||
+		if (!m_displayManager->StartUp(screenWidth, screenHeight) ||
 			!m_renderManger->StartUp(*m_displayManager) ||
 			!m_inputManager->StartUp())
 		{

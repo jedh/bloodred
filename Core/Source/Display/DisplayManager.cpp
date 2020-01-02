@@ -4,7 +4,7 @@ namespace BRCore
 {
     DisplayManager DisplayManager::m_instance;
 
-    bool DisplayManager::StartUp()
+    bool DisplayManager::StartUp(int screenWidth, int screenHeight)
     {
         if ( SDL_Init( SDL_INIT_VIDEO < 0 ) )
         {
@@ -13,7 +13,7 @@ namespace BRCore
         else
         {
             m_window = new Window();
-            m_window->CreateWindow( "My Game", 640, 480 );
+            m_window->CreateWindow( "My Game", screenWidth, screenHeight);
             if ( m_window == NULL )
             {
                 return false;

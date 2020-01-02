@@ -13,7 +13,7 @@ namespace BRCore
         Engine();
         ~Engine();
 
-        int                 Start();
+        int                 Start(int screenWidth = 640, int screenHeight = 480);
         void                Stop();
 
         DisplayManager&     Display();

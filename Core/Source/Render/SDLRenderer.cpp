@@ -12,6 +12,7 @@ namespace BRCore
             return false;
         }
 
+        // Comment this out if we don't want resolution scaling.
         SDL_RenderSetLogicalSize( m_renderer, 640, 480 );        
 
         return true;

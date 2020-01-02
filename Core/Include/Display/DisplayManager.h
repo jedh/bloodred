@@ -10,7 +10,7 @@ namespace BRCore
     public:
         static DisplayManager&          Instance() { return m_instance; }
 
-        bool                            StartUp();
+        bool                            StartUp(int screenWidth, int screenHeight);
         void                            ShutDown();
 
         Window&                         GetWindow() { return *m_window; }
