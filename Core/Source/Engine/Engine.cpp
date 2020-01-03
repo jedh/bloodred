@@ -11,6 +11,7 @@ namespace BRCore
 		m_displayManager = std::make_shared<DisplayManager>(DisplayManager::Instance());
 		m_renderManger = std::make_shared<RenderManager>(RenderManager::Instance());
 		m_inputManager = std::make_shared<InputManager>(InputManager::Instance());
+		m_sceneManager = std::make_shared<SceneManager>(InputManager::Instance());
 		
 	}
 
@@ -60,7 +61,7 @@ namespace BRCore
 
 	void Engine::Run()
 	{
-		m_gameLoop = new GameLoop(*m_renderManger, *m_inputManager);
+		m_gameLoop = new GameLoop(*m_renderManger, *m_inputManager, *m_sceneManager);
 		m_gameLoop->Run();
 		Stop();
 	}

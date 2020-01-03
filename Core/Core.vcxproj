@@ -32,6 +32,8 @@
     <ClInclude Include="Include\Render\RenderManager.h" />
     <ClInclude Include="Include\Display\Window.h" />
     <ClInclude Include="Include\Render\SDLRenderer.h" />
+    <ClInclude Include="Include\Scenes\Scene.h" />
+    <ClInclude Include="Include\Scenes\SceneManager.h" />
     <ClInclude Include="Include\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +47,8 @@
     <ClCompile Include="Source\Render\RenderManager.cpp" />
     <ClCompile Include="Source\Display\Window.cpp" />
     <ClCompile Include="Source\Render\SDLRenderer.cpp" />
+    <ClCompile Include="Source\Scenes\Scene.cpp" />
+    <ClCompile Include="Source\Scenes\SceneManager.cpp" />
     <ClCompile Include="Source\stdafx.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
