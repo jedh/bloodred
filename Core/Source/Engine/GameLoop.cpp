@@ -35,6 +35,7 @@ namespace BRCore
 
 			// Update game/scene/physics.
 
+
 			m_renderManager.Draw();
 		}
 	}

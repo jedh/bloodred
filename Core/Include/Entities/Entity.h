@@ -9,7 +9,7 @@ namespace BRCore
     class Entity
     {
     public:
-        Entity();
+        Entity(std::string name) : m_name(name), m_components{}{};
         ~Entity();
 
         std::string             Name() const { return m_name; }

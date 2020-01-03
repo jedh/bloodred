@@ -2,11 +2,6 @@
 
 namespace BRCore
 {
-    Entity::Entity()
-    {
-
-    }
-
     Entity::~Entity()
     {
 
