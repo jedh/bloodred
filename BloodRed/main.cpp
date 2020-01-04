@@ -3,6 +3,7 @@
 #include <Eigen/Dense>
 #include <memory>
 #include <SDL.h>
+#include "TestScene.h";
 
 int main( int argc, char* args[] )
 {   
@@ -19,8 +20,10 @@ int main( int argc, char* args[] )
     }                            
 
     // TODO: Set up any initial scenes, etc.
+    auto testScene = new BRGame::TestScene("test");        
+    engine->Scenes().AddScene(*testScene);
 
-    engine->Run();    
+    engine->Run();        
 
     return 0;
 }

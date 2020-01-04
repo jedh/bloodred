@@ -1,12 +1,13 @@
 #include <Scenes/SceneManager.h>
 
 namespace BRCore
-{
-	SceneManager SceneManager::m_instance;
+{	
+	SceneManager::~SceneManager() {}
 
-	void SceneManager::AddScene(const Scene& scene)
-	{
-		m_Scenes.push_back(scene);
+	void SceneManager::AddScene(Scene& scene)
+	{	
+		scene.Init();
+		m_scenes.push_back(&scene);		
 	}
 
 	void SceneManager::RemoveScene(const Scene& scene)
@@ -15,12 +16,11 @@ namespace BRCore
 
 	void SceneManager::ClearScenes()
 	{
-		m_Scenes.clear();
+		m_scenes.clear();
 	}
 
-	std::list<Scene&> SceneManager::GetScenes() const
+	const std::list<Scene*>& SceneManager::GetScenes()
 	{
-		return std::list<Scene&>();
+		return m_scenes;
 	}
-
 }

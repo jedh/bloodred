@@ -34,7 +34,10 @@ namespace BRCore
 			}
 
 			// Update game/scene/physics.
-
+			for (auto scene : m_SceneManager.GetScenes())
+			{				
+				scene->Update(deltaTime);
+			}			
 
 			m_renderManager.Draw();
 		}

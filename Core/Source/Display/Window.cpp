@@ -4,7 +4,10 @@ namespace BRCore
 {
     Window::Window()
     {
-        m_window = nullptr;          
+        m_window = nullptr;    
+        m_height = 0;
+        m_width = 0;
+        m_name = "";
     }
 
     Window::~Window() 

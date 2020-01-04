@@ -20,6 +20,7 @@ namespace BRCore
         DisplayManager&     Display();
         RenderManager&      Rendering();
         InputManager&       Input();
+        SceneManager&       Scenes();
         void                Run();
 
     private:

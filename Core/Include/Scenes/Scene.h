@@ -7,10 +7,14 @@ namespace BRCore
 	class Scene
 	{
 	public:
-		Scene();
+		Scene(std::string name) : m_name(name) {};
 		~Scene();
 
-		virtual	void			Update(float deltaTime) = 0;
+		virtual void			Init();
+		virtual void			Update(float deltaTime);
+		virtual void			Shutdown();
+		const std::string&		GetName() { return m_name; }
 	private:
+		std::string				m_name;
 	};
 }
