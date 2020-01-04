@@ -9,7 +9,7 @@ namespace BRGame
 
 	void TestScene::Update(float deltaTime)
 	{
-		//std::cout << deltaTime << "\n";
+		std::cout << deltaTime << "\n";
 	}
 
 	void TestScene::Shutdown()

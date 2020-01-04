@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <memory>
 #include <Scenes/Scene.h>
 
 namespace BRCore
@@ -10,11 +11,11 @@ namespace BRCore
 		SceneManager() : m_scenes{} {};
 		~SceneManager();
 
-		void						AddScene(Scene& scene);
-		void						RemoveScene(const Scene& scene);
-		void						ClearScenes();
-		const std::list<Scene*>&	GetScenes();		
+		void										AddScene(const std::shared_ptr<Scene> scene);
+		void										RemoveScene(const Scene& scene);
+		void										ClearScenes();
+		const std::list<std::shared_ptr<Scene>>		GetScenes() const;		
 	private:				
-		std::list<Scene*>			m_scenes;
+		std::list<std::shared_ptr<Scene>>			m_scenes;
 	};
 }
