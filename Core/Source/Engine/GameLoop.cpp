@@ -25,12 +25,14 @@ namespace BRCore
 			if (std::get<0>(input) == SDL_QUIT)
 			{
 				isRunning = false;
+				return;
 			}
 			else if (std::get<0>(input) == SDL_KEYUP &&
 				std::get<1>(input) == SDLK_ESCAPE)
 			{
 				// This is just temporary for now.
 				isRunning = false;
+				return;
 			}
 
 			// Update game/scene/physics.

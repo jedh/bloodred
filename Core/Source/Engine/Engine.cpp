@@ -5,12 +5,9 @@ namespace BRCore
 {
 	Engine::Engine()
 	{
-		//m_displayManager = &DisplayManager::Instance();
-		//m_renderManger = &RenderManager::Instance();
-		//m_inputManager = &InputManager::Instance();
-		m_displayManager = std::make_shared<DisplayManager>(DisplayManager::Instance());
-		m_renderManger = std::make_shared<RenderManager>(RenderManager::Instance());
-		m_inputManager = std::make_shared<InputManager>(InputManager::Instance());
+		m_displayManager = std::make_shared<DisplayManager>();
+		m_renderManger = std::make_shared<RenderManager>();
+		m_inputManager = std::make_shared<InputManager>();
 		m_sceneManager = std::make_shared<SceneManager>();
 		
 	}
@@ -44,24 +41,24 @@ namespace BRCore
 		SDL_Quit();
 	}
 
-	DisplayManager& Engine::Display()
+	const std::shared_ptr<DisplayManager> Engine::Display()
 	{
-		return *m_displayManager;
+		return m_displayManager;
 	}
 
-	RenderManager& Engine::Rendering()
+	const std::shared_ptr<RenderManager> Engine::Rendering()
 	{
-		return *m_renderManger;
+		return m_renderManger;
 	}
 
-	InputManager& Engine::Input()
+	const std::shared_ptr<InputManager> Engine::Input()
 	{
-		return *m_inputManager;
+		return m_inputManager;
 	}
 
-	SceneManager& Engine::Scenes()
+	const std::shared_ptr<SceneManager> Engine::Scenes()
 	{
-		return *m_sceneManager;
+		return m_sceneManager;
 	}
 
 	void Engine::Run()

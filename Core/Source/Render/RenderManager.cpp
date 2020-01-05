@@ -5,8 +5,6 @@
 
 namespace BRCore
 {
-    RenderManager RenderManager::m_instance;
-
     bool RenderManager::StartUp(DisplayManager& displayManager)
     {
         m_renderer = new SDLRenderer(displayManager.GetWindow());

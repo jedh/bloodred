@@ -4,8 +4,6 @@
 
 namespace BRCore
 {
-    InputManager InputManager::m_instance;
-
     bool InputManager::StartUp()
     {
         return true;
