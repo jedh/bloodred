@@ -20,7 +20,7 @@ int main( int argc, char* args[] )
     }                            
 
     // TODO: Set up any initial scenes, etc.
-    auto testScene = std::make_shared<BRGame::TestScene>("test");
+    auto testScene = std::make_shared<BRGame::TestScene>("test", engine->Display(), engine->Input(), engine->Rendering());
     engine->Scenes()->AddScene(testScene);
 
     engine->Run();        

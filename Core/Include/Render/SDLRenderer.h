@@ -14,7 +14,7 @@ namespace BRCore
 
         bool                    Init() override;
         void                    Destroy() override;
-        void                    Draw() const override;
+        void                    Draw(const std::list<std::shared_ptr<BRFillRect>> rects) const override;
 
     private:
         Window&                 m_window;

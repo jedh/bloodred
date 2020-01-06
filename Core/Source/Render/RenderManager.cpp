@@ -25,6 +25,20 @@ namespace BRCore
 
     void RenderManager::Draw()
     {
-        m_renderer->Draw();
+        m_renderer->Draw(m_rects);
+    }
+    void RenderManager::AddFillRect(const std::shared_ptr<BRFillRect> fillRect)
+    {
+        m_rects.push_back(fillRect);
+    }
+
+    void RenderManager::RemoveFillRect(const std::shared_ptr<BRFillRect> fillRect)
+    {
+        m_rects.remove(fillRect);
+    }
+
+    void RenderManager::ClearFillRects()
+    {
+        m_rects.clear();
     }
 }

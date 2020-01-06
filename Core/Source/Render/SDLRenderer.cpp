@@ -23,22 +23,44 @@ namespace BRCore
         SDL_DestroyRenderer( m_renderer );
     }
 
-    void SDLRenderer::Draw() const
+    void SDLRenderer::Draw(const std::list<std::shared_ptr<BRFillRect>> rects) const
     {
-        SDL_SetRenderDrawColor( m_renderer, 255, 255, 0, 255 );
+        SDL_SetRenderDrawColor( m_renderer, 100, 149, 237, 255 );
         SDL_RenderClear( m_renderer );        
 
-        // Just draw some shapes and what not.
-        SDL_Rect rect;
-        rect.x = 100;
-        rect.y = 100;
-        rect.w = 120;
-        rect.h = 120;
+        for (auto fillRect : rects)
+        {
+            SDL_Rect rect;
+            rect.x = fillRect->x;
+            rect.y = fillRect->y;
+            rect.w = fillRect->w;
+            rect.h = fillRect->h;
 
-        SDL_SetRenderDrawColor( m_renderer, 0, 255, 80, 255 );
+            SDL_SetRenderDrawColor(m_renderer, fillRect->color.r, fillRect->color.g, fillRect->color.b, fillRect->color.a);
+            SDL_RenderFillRect(m_renderer, &rect);
+        }
 
-        SDL_RenderFillRect ( m_renderer, &rect );
+        //// Just draw some shapes and what not.
+        //SDL_Rect rect;
+        //rect.x = 100;
+        //rect.y = 100;
+        //rect.w = 120;
+        //rect.h = 120;
 
-        SDL_RenderPresent( m_renderer );
+        //SDL_SetRenderDrawColor( m_renderer, 0, 255, 80, 255 );
+
+        //SDL_RenderFillRect ( m_renderer, &rect );
+
+        //SDL_Rect rect2;
+        //rect2.x = 150;
+        //rect2.y = 150;
+        //rect2.w = 120;
+        //rect2.h = 120;
+
+        //SDL_SetRenderDrawColor(m_renderer, 255, 255, 80, 255);
+
+        //SDL_RenderFillRect(m_renderer, &rect2);
+
+        SDL_RenderPresent(m_renderer);
     }
 }

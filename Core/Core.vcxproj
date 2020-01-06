@@ -28,6 +28,7 @@
     <ClInclude Include="Include\Entities\Entity.h" />
     <ClInclude Include="Include\Foundation\Vector2.h" />
     <ClInclude Include="Include\Input\InputManager.h" />
+    <ClInclude Include="Include\Render\BRShapes.h" />
     <ClInclude Include="Include\Render\IRenderer.h" />
     <ClInclude Include="Include\Render\RenderManager.h" />
     <ClInclude Include="Include\Display\Window.h" />

@@ -9,7 +9,7 @@ namespace BRCore
     class Timer
     {
     public:
-        Timer() : m_timePrev( high_resolution_clock::now() ) {}
+        Timer() : m_timePrev( high_resolution_clock::now()), m_delta(high_resolution_clock::duration::zero()) {}
 
         float                               GetDelta();
 
