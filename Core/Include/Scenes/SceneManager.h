@@ -14,7 +14,7 @@ namespace BRCore
 		void										AddScene(const std::shared_ptr<Scene> scene);
 		void										RemoveScene(const Scene& scene);
 		void										ClearScenes();
-		const std::list<std::shared_ptr<Scene>>		GetScenes() const;		
+		const std::list<std::shared_ptr<Scene>>&	GetScenes() const;		
 	private:				
 		std::list<std::shared_ptr<Scene>>			m_scenes;
 	};

@@ -19,7 +19,7 @@ namespace BRCore
 		m_scenes.clear();
 	}
 
-	const std::list<std::shared_ptr<Scene>> SceneManager::GetScenes() const
+	const std::list<std::shared_ptr<Scene>>& SceneManager::GetScenes() const
 	{
 		return m_scenes;
 	}

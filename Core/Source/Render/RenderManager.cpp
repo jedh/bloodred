@@ -14,7 +14,7 @@ namespace BRCore
         }
         else
         {
-            false;
+            return false;
         }
     }
 

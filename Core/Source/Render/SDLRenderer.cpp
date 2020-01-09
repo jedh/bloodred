@@ -3,29 +3,32 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include <stdexcept>
+#include <iostream>
 
 namespace BRCore
 {    
     bool SDLRenderer::Init()
     {
-        m_renderer = SDL_CreateRenderer( &m_window.GetWindow(), -1, SDL_RENDERER_ACCELERATED );
-        if ( m_renderer == NULL )
+        try
         {
-            printf("SDL_CreateRenderer could not initialize! SDL_image Error: %s\n", SDL_GetError());
-            return false;
-        }                
+            m_renderer = SDL_CreateRenderer(&m_window.GetWindow(), -1, SDL_RENDERER_ACCELERATED);
+            if (!m_renderer) throw std::runtime_error(SDL_GetError());
 
-        int imgFlags = IMG_INIT_PNG;
-        if (!(IMG_Init(imgFlags) & imgFlags))
-        {                        
-            printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-            return false;
+            int imgFlags = IMG_INIT_PNG;
+            if (!(IMG_Init(imgFlags) & imgFlags)) throw std::runtime_error(IMG_GetError());
+
+            // Comment this out if we don't want resolution scaling.
+            SDL_RenderSetLogicalSize(m_renderer, 640, 480);
+
+            return true;
+        }
+        catch (const std::runtime_error ex)
+        {
+            std::cout << "Failed to initialize SDLRenderer! Internal error: " << ex.what() << std::endl;            
         }
 
-        // Comment this out if we don't want resolution scaling.
-        SDL_RenderSetLogicalSize(m_renderer, 640, 480);       
-
-        return true;
+        return false;
     }
 
     void SDLRenderer::Destroy()
@@ -33,7 +36,7 @@ namespace BRCore
         SDL_DestroyRenderer( m_renderer );
     }
 
-    void SDLRenderer::Draw(const std::list<std::shared_ptr<BRFillRect>> rects, const std::list<std::shared_ptr<Sprite>> sprites) const
+    void SDLRenderer::Draw(const std::list<std::shared_ptr<BRFillRect>>& rects, const std::list<std::shared_ptr<Sprite>>& sprites) const
     {        
         SDL_SetRenderDrawColor(m_renderer, 100, 149, 237, 255);
         SDL_RenderClear( m_renderer );           
@@ -66,18 +69,22 @@ namespace BRCore
 
     SDL_Texture* SDLRenderer::GetTexture(std::string path) const
     {
-        SDL_Texture* loadedTexture = NULL;                
-        SDL_Surface* loadedSurface = IMG_Load(path.c_str());        
-        if (loadedSurface == NULL)
+        try
         {
-            printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+            SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+            if (!loadedSurface) throw std::runtime_error(IMG_GetError());
+
+            SDL_Texture* loadedTexture = SDL_CreateTextureFromSurface(m_renderer, loadedSurface);
+            SDL_FreeSurface(loadedSurface);
+            if (!loadedSurface) throw std::runtime_error(SDL_GetError());
+
+            return loadedTexture;
         }
-        else
-        {           
-            loadedTexture = SDL_CreateTextureFromSurface(m_renderer, loadedSurface);
-            SDL_FreeSurface(loadedSurface);            
+        catch (const std::runtime_error ex)
+        {
+            std::cout << "Failed to load image " << path << "! Internal error: " << ex.what() << std::endl;
         }
 
-        return loadedTexture;
+        return nullptr;        
     }
 }
