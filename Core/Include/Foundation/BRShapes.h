@@ -3,6 +3,8 @@
 
 struct BRRect
 {
+	BRRect(int inX, int inY, int inW, int inH) :
+		x(inX), y(inY), w(inW), h(inH) {};
 	int x, y, w, h;
 };
 

@@ -4,7 +4,8 @@
 #include <Display/DisplayManager.h>
 #include <Input/InputManager.h>
 #include <Render/RenderManager.h>
-#include <Render/BRShapes.h>
+#include <Foundation/BRShapes.h>
+#include <Sprites/Sprite.h>
 
 namespace BRGame
 {
@@ -23,5 +24,6 @@ namespace BRGame
 	private:
 		BRCore::Vector2 m_position;
 		std::shared_ptr<BRFillRect> m_rect;
+		std::shared_ptr<Sprite> m_sprite;
 	};
 }

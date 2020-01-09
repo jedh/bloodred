@@ -25,7 +25,7 @@ namespace BRCore
 
     void RenderManager::Draw()
     {
-        m_renderer->Draw(m_rects);
+        m_renderer->Draw(m_rects, m_sprites);
     }
     void RenderManager::AddFillRect(const std::shared_ptr<BRFillRect> fillRect)
     {
@@ -40,5 +40,25 @@ namespace BRCore
     void RenderManager::ClearFillRects()
     {
         m_rects.clear();
+    }
+
+    void RenderManager::AddSprite(const std::shared_ptr<Sprite> sprite)
+    {
+        m_sprites.push_back(sprite);
+    }
+
+    void RenderManager::RemoveSprite(const std::shared_ptr<Sprite> sprite)
+    {
+        m_sprites.remove(sprite);
+    }
+
+    void RenderManager::ClearSprites()
+    {
+        m_sprites.clear();
+    }
+
+    SDL_Texture* RenderManager::GetTexture(std::string path) const
+    {
+        return m_renderer->GetTexture(path);
     }
 }

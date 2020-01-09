@@ -28,13 +28,14 @@
     <ClInclude Include="Include\Entities\Entity.h" />
     <ClInclude Include="Include\Foundation\Vector2.h" />
     <ClInclude Include="Include\Input\InputManager.h" />
-    <ClInclude Include="Include\Render\BRShapes.h" />
+    <ClInclude Include="Include\Foundation\BRShapes.h" />
     <ClInclude Include="Include\Render\IRenderer.h" />
     <ClInclude Include="Include\Render\RenderManager.h" />
     <ClInclude Include="Include\Display\Window.h" />
     <ClInclude Include="Include\Render\SDLRenderer.h" />
     <ClInclude Include="Include\Scenes\Scene.h" />
     <ClInclude Include="Include\Scenes\SceneManager.h" />
+    <ClInclude Include="Include\Sprites\Sprite.h" />
     <ClInclude Include="Include\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -50,7 +51,11 @@
     <ClCompile Include="Source\Render\SDLRenderer.cpp" />
     <ClCompile Include="Source\Scenes\Scene.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager.cpp" />
+    <ClCompile Include="Source\Sprites\Sprite.cpp" />
     <ClCompile Include="Source\stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\ball.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FC7A11A7-23EE-4E2B-91FB-5DA9A48495E4}</ProjectGuid>
@@ -111,6 +116,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
@@ -142,21 +149,24 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Development\SDL2\include;$(ProjectDir)Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Development\SDL2_image\include;C:\Development\SDL2\include;$(ProjectDir)Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>copy /Y "C:\Development\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(OutDir)"</Command>
+      <Command>copy /Y "C:\Development\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(OutDir)"
+copy /Y "C:\Development\SDL2_image\lib\$(PlatformTarget)\SDL2_image.dll" "$(OutDir)"
+copy /Y "C:\Development\SDL2_image\lib\$(PlatformTarget)\libpng16-16.dll" "$(OutDir)"
+copy /Y "C:\Development\SDL2_image\lib\$(PlatformTarget)\zlib1.dll" "$(OutDir)"</Command>
       <Message>Copy SDL2 Libraries to Build Output Folder</Message>
       <Outputs>SDL2.dll</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
     </CustomBuildStep>
     <Lib>
-      <AdditionalLibraryDirectories>C:\Development\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Development\SDL2_image\lib\x64;C:\Development\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
