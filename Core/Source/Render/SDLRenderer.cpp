@@ -48,12 +48,6 @@ namespace BRCore
 
             SDL_SetRenderDrawColor(m_renderer, fillRect->color.r, fillRect->color.g, fillRect->color.b, fillRect->color.a);
             SDL_RenderFillRect(m_renderer, &rect);
-
-            // Draw textures.
-            /*if (m_tempTexture != NULL)
-            {
-                SDL_RenderCopy(m_renderer, m_tempTexture, NULL, &rect);
-            }*/
         }
 
         for (auto sprite : sprites)
@@ -72,29 +66,16 @@ namespace BRCore
 
     SDL_Texture* SDLRenderer::GetTexture(std::string path) const
     {
-        SDL_Texture* loadedTexture = NULL;
-                
-        SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+        SDL_Texture* loadedTexture = NULL;                
+        SDL_Surface* loadedSurface = IMG_Load(path.c_str());        
         if (loadedSurface == NULL)
         {
             printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
         }
         else
-        {
-            SDL_Surface* screenSurface = SDL_GetWindowSurface(&m_window.GetWindow());
-            SDL_Surface* optimizedSurface = SDL_ConvertSurface(loadedSurface, screenSurface->format, 0);
-            if (optimizedSurface == NULL)
-            {
-                printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-            }
-            else
-            {
-                optimizedSurface = SDL_ConvertSurfaceFormat(loadedSurface, SDL_PIXELFORMAT_RGBA32, 0);
-                loadedTexture = SDL_CreateTextureFromSurface(m_renderer, optimizedSurface);
-            }
-
-            SDL_FreeSurface(loadedSurface);
-            SDL_FreeSurface(optimizedSurface);
+        {           
+            loadedTexture = SDL_CreateTextureFromSurface(m_renderer, loadedSurface);
+            SDL_FreeSurface(loadedSurface);            
         }
 
         return loadedTexture;
