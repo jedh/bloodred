@@ -1,7 +1,8 @@
 #include "TestScene.h"
+#include <Eigen/Dense>
 
 namespace BRGame
-{
+{	
 	void TestScene::Init()
 	{
 		std::cout << "init test scene" << "\n";
@@ -19,14 +20,19 @@ namespace BRGame
 	}
 
 	void TestScene::Update(float deltaTime)
-	{
-		m_position.x += 0.1 * deltaTime;
-		m_position.y += 0.1 * deltaTime;
-		m_rect->x = m_position.x;
-		m_rect->y = m_position.y;
+	{				
+		
+		//m_position.x += 0.1 * deltaTime;
+		m_position.y += 100 * deltaTime;
+		//std::cout << deltaTime << std::endl;
+		//m_rect->x = m_position.x;
+		//m_rect->y = m_position.y;
 
-		m_sprite->rect.x = m_position.x * 0.5;
-		m_sprite->rect.y = m_position.y * 0.5;
+		//m_sprite->rect.x = m_position.x;
+		m_sprite->rect.y = m_position.y;
+
+		// Get bounds:
+		
 	}
 
 	void TestScene::Shutdown()
