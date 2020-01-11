@@ -3,9 +3,9 @@
 
 struct BRRect
 {
-	BRRect(int inX, int inY, int inW, int inH) :
+	BRRect(float inX, float inY, float inW, float inH) :
 		x(inX), y(inY), w(inW), h(inH) {};
-	int x, y, w, h;
+	float x, y, w, h;
 };
 
 struct BRColor
@@ -18,9 +18,9 @@ struct BRColor
 
 struct BRFillRect
 {
-	BRFillRect(int inX, int inY, int inW, int inH, BRColor inColor) :
+	BRFillRect(float inX, float inY, float inW, float inH, BRColor inColor) :
 		x(inX), y(inY), w(inW), h(inH), color(inColor) {};
 
-	int x, y, w, h;
+	float x, y, w, h;
 	BRColor color;
 };

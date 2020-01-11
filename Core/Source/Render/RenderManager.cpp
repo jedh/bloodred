@@ -9,7 +9,7 @@ namespace BRCore
     {
         m_renderer = new SDLRenderer(displayManager.GetWindow());
         if (m_renderer->Init())
-        {
+        {               
             return true;
         }
         else
@@ -60,5 +60,10 @@ namespace BRCore
     SDL_Texture* RenderManager::GetTexture(std::string path) const
     {
         return m_renderer->GetTexture(path);
+    }
+
+    BRCore::Vector2 RenderManager::GetLogicalDisplaySize() const
+    {
+        return m_renderer->GetLogicalRenderSize();
     }
 }

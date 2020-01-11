@@ -12,7 +12,6 @@ int main( int argc, char* args[] )
     std::cout << v1 + v2 << std::endl;    
 
     std::unique_ptr<BRCore::Engine> engine(new BRCore::Engine());
-    //if ( engine->Start(640, 480) != 0 )
     if ( engine->Start(1024, 768) != 0 )
     {
         std::cout << "Window creation error: " << SDL_GetError() << std::endl;

@@ -18,8 +18,11 @@ namespace BRCore
             int imgFlags = IMG_INIT_PNG;
             if (!(IMG_Init(imgFlags) & imgFlags)) throw std::runtime_error(IMG_GetError());
 
-            // Comment this out if we don't want resolution scaling.
+            // Comment this out if we don't want resolution scaling.            
             SDL_RenderSetLogicalSize(m_renderer, 640, 480);
+            int x, y;
+            SDL_RenderGetLogicalSize(m_renderer, &x, &y);
+            m_logicalRenderSize = BRCore::Vector2(x, y);
 
             return true;
         }
@@ -70,7 +73,7 @@ namespace BRCore
     SDL_Texture* SDLRenderer::GetTexture(std::string path) const
     {
         try
-        {
+        {            
             SDL_Surface* loadedSurface = IMG_Load(path.c_str());
             if (!loadedSurface) throw std::runtime_error(IMG_GetError());
 
@@ -86,5 +89,10 @@ namespace BRCore
         }
 
         return nullptr;        
+    }
+
+    BRCore::Vector2 SDLRenderer::GetLogicalRenderSize() const
+    {
+        return m_logicalRenderSize;
     }
 }

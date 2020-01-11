@@ -4,15 +4,14 @@
 namespace BRCore
 {
     float Timer::GetDelta()
+    {       
+        return m_delta.count();
+    }
+
+    void Timer::Update()
     {
         m_timeCurrent = steady_clock::now();
-        m_delta = m_timeCurrent - m_timePrev;                          
-        m_timePrev = m_timeCurrent;        
-        
-        // Eventually calculate this lag for rendering.
-        //m_lag += m_delta;        
-        //std::cout << "timestep: " << m_timestep.count() <<  ", delta: " << m_delta.count() << ", lag:" << m_lag.count() * 0.001 << std::endl;
-
-        return m_delta.count() * 0.001;
+        m_delta = m_timeCurrent - m_timePrev;
+        m_timePrev = m_timeCurrent;
     }
 }

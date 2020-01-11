@@ -11,13 +11,13 @@ namespace BRCore
 		bool isRunning = true;
 		//m_timer = new Timer();
 		m_timer = std::make_unique<Timer>();
-		float deltaTime = 0;
 
 		SDL_Event eventHandler;
 
 		while (isRunning)
 		{
-			deltaTime = m_timer->GetDelta();
+			m_timer->Update();				
+			m_lag += m_timer->GetDelta();			
 
 			auto input = m_inputManager.ProcessInput();
 
@@ -35,11 +35,17 @@ namespace BRCore
 				return;
 			}
 
-			// Update game/scene/physics.
-			for (auto scene : m_SceneManager.GetScenes())
-			{				
-				scene->Update(deltaTime);
-			}			
+			while (m_lag >= MS_PER_UPDATE)
+			{
+				// Update game/scene/physics.
+				for (auto scene : m_SceneManager.GetScenes())
+				{
+					// Send delta time in seconds.
+					scene->Update(m_timeStep);
+				}
+
+				m_lag -= MS_PER_UPDATE;
+			}
 
 			m_renderManager.Draw();
 		}

@@ -11,8 +11,8 @@ namespace BRCore
         bool                            StartUp(int screenWidth, int screenHeight);
         void                            ShutDown();
 
-        Window&                         GetWindow() { return *m_window; }
+        Window&                         GetWindow() { return *m_window; }        
     private:      
-        Window*                         m_window;
+        Window*                         m_window;        
     };
 }
