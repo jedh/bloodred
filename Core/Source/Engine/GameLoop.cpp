@@ -47,7 +47,7 @@ namespace BRCore
 				m_lag -= MS_PER_UPDATE;
 			}
 
-			m_renderManager.Draw();
+			m_renderManager.Draw(m_camera);
 		}
 	}
 }

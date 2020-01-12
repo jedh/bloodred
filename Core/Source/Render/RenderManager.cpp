@@ -23,10 +23,11 @@ namespace BRCore
         m_renderer->Destroy();
     }
 
-    void RenderManager::Draw()
+    void RenderManager::Draw(const Camera& camera)
     {
-        m_renderer->Draw(m_rects, m_sprites);
+        m_renderer->Draw(camera, m_rects, m_sprites);
     }
+
     void RenderManager::AddFillRect(const std::shared_ptr<BRFillRect> fillRect)
     {
         m_rects.push_back(fillRect);

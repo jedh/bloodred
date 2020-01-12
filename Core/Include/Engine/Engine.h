@@ -5,6 +5,7 @@
 #include "Input\InputManager.h"
 #include "Scenes\SceneManager.h"
 #include "GameLoop.h"
+#include "Camera/Camera.h"
 
 namespace BRCore
 {
@@ -21,6 +22,7 @@ namespace BRCore
 		const std::shared_ptr<RenderManager> Rendering();
 		const std::shared_ptr<InputManager> Input();
 		const std::shared_ptr<SceneManager> Scenes();
+		std::shared_ptr<Camera> CameraMain();
 		void Run();
 
 	private:
@@ -28,6 +30,7 @@ namespace BRCore
 		std::shared_ptr<RenderManager> m_renderManger;
 		std::shared_ptr<InputManager> m_inputManager;
 		std::shared_ptr<SceneManager> m_sceneManager;
-		GameLoop* m_gameLoop;
+		std::shared_ptr<Camera> m_camera;
+		std::unique_ptr<GameLoop> m_gameLoop;
 	};
 }

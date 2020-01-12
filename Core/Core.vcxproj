@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Camera\Camera.h" />
     <ClInclude Include="Include\Components\Component.h" />
     <ClInclude Include="Include\BRCore.h" />
     <ClInclude Include="Include\Display\DisplayManager.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Include\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Display\DisplayManager.cpp" />
     <ClCompile Include="Source\Engine\Engine.cpp" />
     <ClCompile Include="Source\Engine\GameLoop.cpp" />

@@ -28,6 +28,7 @@ namespace BRCore
 			return 1;
 		}
 
+		m_camera = std::make_shared<Camera>(m_renderManger->GetLogicalDisplaySize());
 		return 0;
 	}
 
@@ -61,9 +62,14 @@ namespace BRCore
 		return m_sceneManager;
 	}
 
+	std::shared_ptr<Camera> Engine::CameraMain()
+	{
+		return m_camera;
+	}
+
 	void Engine::Run()
 	{
-		m_gameLoop = new GameLoop(*m_renderManger, *m_inputManager, *m_sceneManager);
+		m_gameLoop = std::make_unique<GameLoop>(*m_renderManger, *m_inputManager, *m_sceneManager, *m_camera);
 		m_gameLoop->Run();
 		Stop();
 	}

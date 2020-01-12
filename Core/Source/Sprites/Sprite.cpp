@@ -1,10 +1,13 @@
 #include "Sprites/Sprite.h"
 
-Sprite::~Sprite()
+namespace BRCore
 {
-	if (texture != NULL)
+	Sprite::~Sprite()
 	{
-		SDL_DestroyTexture(texture);
-		texture == NULL;
+		if (texture != NULL)
+		{
+			SDL_DestroyTexture(texture);
+			texture == NULL;
+		}
 	}
 }

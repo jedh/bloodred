@@ -6,6 +6,7 @@
 #include <Render/RenderManager.h>
 #include <Foundation/BRShapes.h>
 #include <Sprites/Sprite.h>
+#include "Camera/Camera.h"
 
 namespace BRGame
 {
@@ -16,14 +17,15 @@ namespace BRGame
 			std::string name,
 			const std::shared_ptr<BRCore::DisplayManager> display,
 			const std::shared_ptr<BRCore::InputManager> input,
-			const std::shared_ptr<BRCore::RenderManager> rendering) : 
-			Scene(name, display, input, rendering) {};
+			const std::shared_ptr<BRCore::RenderManager> rendering,
+			std::shared_ptr<BRCore::Camera> camera) :
+			Scene(name, display, input, rendering, camera) {};
 		void Init() override;
 		void Update(float deltaTime) override;
 		void Shutdown() override;
 	private:
 		BRCore::Vector2 m_position;
-		std::shared_ptr<BRFillRect> m_rect;
-		std::shared_ptr<Sprite> m_sprite;
+		std::shared_ptr<BRCore::BRFillRect> m_rect;
+		std::shared_ptr<BRCore::Sprite> m_sprite;
 	};
 }

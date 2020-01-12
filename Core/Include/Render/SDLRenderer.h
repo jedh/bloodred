@@ -15,7 +15,7 @@ namespace BRCore
 
 		bool Init() override;
 		void Destroy() override;
-		void Draw(const std::list<std::shared_ptr<BRFillRect>>& rects, const std::list<std::shared_ptr<Sprite>>& sprites) const override;
+		void Draw(const Camera& camera, const std::list<std::shared_ptr<BRFillRect>>& rects, const std::list<std::shared_ptr<Sprite>>& sprites) const override;
 		SDL_Texture* GetTexture(std::string path) const override;
 		BRCore::Vector2 GetLogicalRenderSize() const override;
 	private:

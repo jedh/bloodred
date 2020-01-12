@@ -8,15 +8,19 @@
 #include <memory>
 #include <string>
 #include "Foundation/Vector2.h"
+#include "Camera/Camera.h"
 
 namespace BRCore
 {
+	//class Camera;
+
 	class RenderManager
 	{
 	public:
 		bool StartUp(DisplayManager& displayManager);
 		void ShutDown();
-		void Draw(); // Test function.
+		//void Draw(const std::shared_ptr<Camera> camera);
+		void Draw(const Camera& camera);
 		void AddFillRect(const std::shared_ptr<BRFillRect> fillRect);
 		void AddSprite(const std::shared_ptr<Sprite> sprite);
 		void RemoveSprite(const std::shared_ptr<Sprite> sprite);

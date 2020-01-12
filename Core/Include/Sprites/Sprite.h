@@ -4,13 +4,16 @@
 #include "Foundation/BRShapes.h"
 #include <memory>
 
-class Sprite
+namespace BRCore
 {
-public:
-	Sprite(BRRect inRect, SDL_Texture* inTexture) : rect(inRect), texture(inTexture) {};
-	~Sprite();
+	class Sprite
+	{
+	public:
+		Sprite(BRCore::BRRect inRect, SDL_Texture* inTexture) : rect(inRect), texture(inTexture) {};
+		~Sprite();
 
-	//std::unique_ptr<BRRect> rect;
-	BRRect rect;
-	SDL_Texture* texture;	
-};
+		//std::unique_ptr<BRRect> rect;
+		BRCore::BRRect rect;
+		SDL_Texture* texture;
+	};
+}

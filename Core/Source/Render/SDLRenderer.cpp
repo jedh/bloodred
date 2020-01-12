@@ -39,16 +39,17 @@ namespace BRCore
         SDL_DestroyRenderer( m_renderer );
     }
 
-    void SDLRenderer::Draw(const std::list<std::shared_ptr<BRFillRect>>& rects, const std::list<std::shared_ptr<Sprite>>& sprites) const
+    void SDLRenderer::Draw(const Camera& camera, const std::list<std::shared_ptr<BRFillRect>>& rects, const std::list<std::shared_ptr<Sprite>>& sprites) const
     {        
         SDL_SetRenderDrawColor(m_renderer, 100, 149, 237, 255);
         SDL_RenderClear( m_renderer );           
+        auto offset = camera.GetOffset();
 
         for (auto fillRect : rects)
         {
             SDL_Rect rect;
-            rect.x = fillRect->x;
-            rect.y = fillRect->y;
+            rect.x = fillRect->x - offset.x;
+            rect.y = fillRect->y - offset.y;
             rect.w = fillRect->w;
             rect.h = fillRect->h;
 
@@ -59,8 +60,8 @@ namespace BRCore
         for (auto sprite : sprites)
         {
             SDL_Rect rect;
-            rect.x = sprite->rect.x;
-            rect.y = sprite->rect.y;
+            rect.x = sprite->rect.x - offset.x;
+            rect.y = sprite->rect.y - offset.y;
             rect.w = sprite->rect.w;
             rect.h = sprite->rect.h;
 
