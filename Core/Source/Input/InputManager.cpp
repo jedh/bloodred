@@ -15,18 +15,30 @@ namespace BRCore
     }
     
     std::tuple<int, SDL_Keycode> InputManager::ProcessInput()
-    {
-        int inputCode = SDL_PollEvent(&m_inputEvent);
-        
-        if ( inputCode != 0 )
+    {                           
+        m_lastInputEvent = std::make_tuple(NULL, NULL);
+        while (SDL_PollEvent(&m_inputEvent) != 0 )
         {
-            // Do any special handling here.
-            if (m_inputEvent.type == SDL_KEYUP && m_inputEvent.key.keysym.sym == SDLK_ESCAPE)
+            if (m_inputEvent.type == SDL_KEYDOWN)
             {
-                printf("quit\n");
+                std::cout << "key down" << std::endl;
+                m_lastInputEvent = std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);                                                
+                return m_lastInputEvent;
             }
-        }
-
-        return std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);
+            else if (m_inputEvent.type == SDL_KEYUP)
+            {
+                std::cout << "key up" << std::endl;
+                m_lastInputEvent = std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);                
+                return m_lastInputEvent;
+            }
+            else if (m_inputEvent.type == SDL_QUIT)
+            {
+                std::cout << "quit" << std::endl;
+                m_lastInputEvent = std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);
+                return m_lastInputEvent;                
+            }
+        }        
+                        
+        return m_lastInputEvent;
     }
 }

@@ -17,26 +17,26 @@ namespace BRCore
 		while (isRunning)
 		{
 			m_timer->Update();				
-			m_lag += m_timer->GetDelta();			
-
-			auto input = m_inputManager.ProcessInput();
-
-			// Process input.            
-			if (std::get<0>(input) == SDL_QUIT)
-			{
-				isRunning = false;
-				return;
-			}
-			else if (std::get<0>(input) == SDL_KEYUP &&
-				std::get<1>(input) == SDLK_ESCAPE)
-			{
-				// This is just temporary for now.
-				isRunning = false;
-				return;
-			}
+			m_lag += m_timer->GetDelta();						
 
 			while (m_lag >= MS_PER_UPDATE)
 			{
+				auto input = m_inputManager.ProcessInput();
+
+				// Process input.            
+				if (std::get<0>(input) == SDL_QUIT)
+				{
+					isRunning = false;
+					return;
+				}
+				else if (std::get<0>(input) == SDL_KEYUP &&
+					std::get<1>(input) == SDLK_ESCAPE)
+				{
+					// This is just temporary for now.
+					isRunning = false;
+					return;
+				}
+
 				// Update game/scene/physics.
 				for (auto scene : m_SceneManager.GetScenes())
 				{

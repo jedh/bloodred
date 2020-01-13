@@ -25,13 +25,42 @@ namespace BRGame
 	{						
 		m_position.x += 50 * deltaTime;
 		m_position.y += 100 * deltaTime;
-		//m_rect->x = m_position.x;
-		//m_rect->y = m_position.y;
+
+		auto inputEvent = m_input->GetEvent();
+		/*if (std::get<0>(inputEvent) == SDL_KEYDOWN)
+		{
+			std::cout << "key down" << std::endl;
+		}*/
+
+		if (std::get<0>(inputEvent) == SDL_KEYDOWN)
+		{
+			std::cout << "KEY DOWN" << std::endl;
+			BRCore::Vector2 camDirection = BRCore::Vector2(0, 0);
+			auto key = std::get<1>(inputEvent);
+			if (key == SDLK_UP)
+			{
+				camDirection.y = -1;
+			}
+			if (key == SDLK_DOWN)
+			{
+				camDirection.y = 1;
+			}
+			if (key == SDLK_LEFT)
+			{
+				camDirection.x = -1;
+			}
+			if (key == SDLK_RIGHT)
+			{
+				camDirection.x = 1;
+			}
+
+			m_camera->cameraRect.x += 100 * camDirection.x * deltaTime;
+			m_camera->cameraRect.y += 100 * camDirection.y * deltaTime;
+		}
 
 		//m_camera->cameraRect.x += 30 * deltaTime;
 		//m_camera->cameraRect.y += 30 * deltaTime;
-
-		//m_sprite->rect.x = m_position.x;
+		
 		m_sprite->rect.x += direction.x() * 100 * deltaTime;
 		m_sprite->rect.y += direction.y() * 80 * deltaTime;		
 		
@@ -60,7 +89,7 @@ namespace BRGame
 		{
 			m_sprite->rect.y = cameraRect.y;
 			direction.y() = 1;
-		}		
+		}				
 	}
 
 	void TestScene::Shutdown()
