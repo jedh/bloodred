@@ -4,6 +4,7 @@
 #include "Input\InputManager.h"
 #include "Scenes\SceneManager.h"
 #include "Camera\Camera.h"
+#include "Events/EventPoller.h"
 
 namespace BRCore
 {	
@@ -28,11 +29,12 @@ namespace BRCore
 
 	private:
 		std::unique_ptr<Timer> m_timer;
+		std::unique_ptr<EventPoller> m_eventPoller;
 		RenderManager& m_renderManager;
 		InputManager& m_inputManager;
 		SceneManager& m_SceneManager;
 		Camera& m_camera;
 		float m_lag;
-		float m_timeStep;
+		float m_timeStep;		
 	};
 }

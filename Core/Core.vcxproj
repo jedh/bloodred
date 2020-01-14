@@ -27,6 +27,7 @@
     <ClInclude Include="Include\Engine\GameLoop.h" />
     <ClInclude Include="Include\Engine\Timer.h" />
     <ClInclude Include="Include\Entities\Entity.h" />
+    <ClInclude Include="Include\Events\EventPoller.h" />
     <ClInclude Include="Include\Foundation\Vector2.h" />
     <ClInclude Include="Include\Input\InputManager.h" />
     <ClInclude Include="Include\Foundation\BRShapes.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Source\Engine\GameLoop.cpp" />
     <ClCompile Include="Source\Engine\Timer.cpp" />
     <ClCompile Include="Source\Entities\Entity.cpp" />
+    <ClCompile Include="Source\Events\EventPoller.cpp" />
     <ClCompile Include="Source\Foundation\Vector2.cpp" />
     <ClCompile Include="Source\Input\InputManager.cpp" />
     <ClCompile Include="Source\Render\RenderManager.cpp" />

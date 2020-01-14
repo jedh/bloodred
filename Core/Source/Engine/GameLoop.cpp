@@ -8,9 +8,9 @@ namespace BRCore
 {
 	void GameLoop::Run()
 	{
-		bool isRunning = true;
-		//m_timer = new Timer();
+		bool isRunning = true;		
 		m_timer = std::make_unique<Timer>();
+		m_eventPoller = std::make_unique<EventPoller>();
 
 		SDL_Event eventHandler;
 
@@ -20,17 +20,18 @@ namespace BRCore
 			m_lag += m_timer->GetDelta();						
 
 			while (m_lag >= MS_PER_UPDATE)
-			{
-				auto input = m_inputManager.ProcessInput();
+			{				
+				//std::cout << "update" << std::endl;
+				m_eventPoller->ProcessEvents(m_inputManager);
+				auto ev = m_eventPoller->GetLastEvent();
 
-				// Process input.            
-				if (std::get<0>(input) == SDL_QUIT)
-				{
+				if (ev.type && ev.type == SDL_QUIT)
+				{					
+					std::cout << "QUIT" << std::endl;
 					isRunning = false;
 					return;
 				}
-				else if (std::get<0>(input) == SDL_KEYUP &&
-					std::get<1>(input) == SDLK_ESCAPE)
+				else if (m_inputManager.GetKeyDown(SDLK_ESCAPE))
 				{
 					// This is just temporary for now.
 					isRunning = false;
@@ -43,6 +44,8 @@ namespace BRCore
 					// Send delta time in seconds.
 					scene->Update(m_timeStep);
 				}
+
+				m_inputManager.ClearEvents();
 
 				m_lag -= MS_PER_UPDATE;
 			}

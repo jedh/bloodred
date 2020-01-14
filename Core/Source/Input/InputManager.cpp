@@ -14,31 +14,35 @@ namespace BRCore
 
     }
     
-    std::tuple<int, SDL_Keycode> InputManager::ProcessInput()
-    {                           
-        m_lastInputEvent = std::make_tuple(NULL, NULL);
-        while (SDL_PollEvent(&m_inputEvent) != 0 )
+    void InputManager::AddKeyboardEvent(SDL_KeyboardEvent keyboardEvent)
+    {
+        m_KeyMap[keyboardEvent.keysym.sym] = keyboardEvent;
+    }
+
+    bool InputManager::GetKeyDown(SDL_Keycode keycode) const
+    {       
+        auto result = m_KeyMap.find(keycode);        
+        if (result != m_KeyMap.end() && result->second.state == SDL_PRESSED)
         {
-            if (m_inputEvent.type == SDL_KEYDOWN)
-            {
-                std::cout << "key down" << std::endl;
-                m_lastInputEvent = std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);                                                
-                return m_lastInputEvent;
-            }
-            else if (m_inputEvent.type == SDL_KEYUP)
-            {
-                std::cout << "key up" << std::endl;
-                m_lastInputEvent = std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);                
-                return m_lastInputEvent;
-            }
-            else if (m_inputEvent.type == SDL_QUIT)
-            {
-                std::cout << "quit" << std::endl;
-                m_lastInputEvent = std::make_tuple(m_inputEvent.type, m_inputEvent.key.keysym.sym);
-                return m_lastInputEvent;                
-            }
-        }        
-                        
-        return m_lastInputEvent;
+            return true;
+        }
+
+        return false;
+    }
+
+    bool InputManager::GetKeyUp(SDL_Keycode keycode) const
+    {
+        auto result = m_KeyMap.find(keycode);
+        if (result != m_KeyMap.end() && result->second.state == SDL_RELEASED)
+        {            
+            return true;
+        }
+
+        return false;
+    }       
+
+    void InputManager::ClearEvents()
+    {
+        m_KeyMap.clear();
     }
 }

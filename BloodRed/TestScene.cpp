@@ -2,7 +2,7 @@
 #include <Eigen/Dense>
 
 namespace BRGame
-{	
+{
 	Eigen::Vector2f direction = Eigen::Vector2f(1, 1);
 
 	void TestScene::Init()
@@ -15,55 +15,42 @@ namespace BRGame
 
 		auto texture = m_rendering->GetTexture("../Resources/ball.png");
 		if (texture != NULL)
-		{			
+		{
 			m_sprite = std::make_shared<BRCore::Sprite>(BRCore::BRRect(100, 100, 100, 100), texture);
 			m_rendering->AddSprite(m_sprite);
 		}
 	}
 
 	void TestScene::Update(float deltaTime)
-	{						
+	{
 		m_position.x += 50 * deltaTime;
 		m_position.y += 100 * deltaTime;
 
-		auto inputEvent = m_input->GetEvent();
-		/*if (std::get<0>(inputEvent) == SDL_KEYDOWN)
+		BRCore::Vector2 camDirection = BRCore::Vector2(0, 0);		
+		if (m_input->GetKeyDown(SDLK_UP))
 		{
-			std::cout << "key down" << std::endl;
-		}*/
-
-		if (std::get<0>(inputEvent) == SDL_KEYDOWN)
+			camDirection.y = -1;
+		}
+		if (m_input->GetKeyDown(SDLK_DOWN))
 		{
-			std::cout << "KEY DOWN" << std::endl;
-			BRCore::Vector2 camDirection = BRCore::Vector2(0, 0);
-			auto key = std::get<1>(inputEvent);
-			if (key == SDLK_UP)
-			{
-				camDirection.y = -1;
-			}
-			if (key == SDLK_DOWN)
-			{
-				camDirection.y = 1;
-			}
-			if (key == SDLK_LEFT)
-			{
-				camDirection.x = -1;
-			}
-			if (key == SDLK_RIGHT)
-			{
-				camDirection.x = 1;
-			}
-
-			m_camera->cameraRect.x += 100 * camDirection.x * deltaTime;
-			m_camera->cameraRect.y += 100 * camDirection.y * deltaTime;
+			camDirection.y = 1;
+		}
+		if (m_input->GetKeyDown(SDLK_LEFT))
+		{
+			camDirection.x = -1;
+		}
+		if (m_input->GetKeyDown(SDLK_RIGHT))
+		{
+			camDirection.x = 1;
 		}
 
-		//m_camera->cameraRect.x += 30 * deltaTime;
-		//m_camera->cameraRect.y += 30 * deltaTime;
-		
+		m_camera->cameraRect.x += 100 * camDirection.x * deltaTime;
+		m_camera->cameraRect.y += 100 * camDirection.y * deltaTime;
+
+
 		m_sprite->rect.x += direction.x() * 100 * deltaTime;
-		m_sprite->rect.y += direction.y() * 80 * deltaTime;		
-		
+		m_sprite->rect.y += direction.y() * 80 * deltaTime;
+
 		auto cameraRect = m_camera->cameraRect;
 		//auto worldBounds = m_rendering->GetLogicalDisplaySize();
 
@@ -89,7 +76,7 @@ namespace BRGame
 		{
 			m_sprite->rect.y = cameraRect.y;
 			direction.y() = 1;
-		}				
+		}
 	}
 
 	void TestScene::Shutdown()
