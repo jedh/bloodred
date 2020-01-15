@@ -27,19 +27,19 @@ namespace BRGame
 		m_position.y += 100 * deltaTime;
 
 		BRCore::Vector2 camDirection = BRCore::Vector2(0, 0);		
-		if (m_input->GetKeyDown(SDLK_UP))
+		if (m_input->GetKeyHeld(SDLK_UP))
 		{
 			camDirection.y = -1;
 		}
-		if (m_input->GetKeyDown(SDLK_DOWN))
+		if (m_input->GetKeyHeld(SDLK_DOWN))
 		{
 			camDirection.y = 1;
 		}
-		if (m_input->GetKeyDown(SDLK_LEFT))
+		if (m_input->GetKeyHeld(SDLK_LEFT))
 		{
 			camDirection.x = -1;
 		}
-		if (m_input->GetKeyDown(SDLK_RIGHT))
+		if (m_input->GetKeyHeld(SDLK_RIGHT))
 		{
 			camDirection.x = 1;
 		}

@@ -15,8 +15,10 @@ namespace BRCore
 		void										AddKeyboardEvent(SDL_KeyboardEvent keyboardEvent);
 		bool										GetKeyDown(SDL_Keycode keycode) const;
 		bool										GetKeyUp(SDL_Keycode keycode) const;		
+		bool										GetKeyHeld(SDL_Keycode keycode) const;
 		void										ClearEvents();
 	private:		
 		std::map<SDL_Keycode, SDL_KeyboardEvent>	m_KeyMap;
+		std::map<SDL_Keycode, bool>					m_HeldKeyMap;
 	};
 }
