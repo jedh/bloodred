@@ -47,6 +47,8 @@ namespace BRCore
 
 				m_inputManager.ClearEvents();
 
+				m_renderManager.UpdateAnimations(m_timeStep);
+
 				m_lag -= MS_PER_UPDATE;
 			}
 

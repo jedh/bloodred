@@ -5,6 +5,7 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
+#include "Sprites/SpriteAnimation.h"
 
 namespace BRCore
 {    
@@ -45,7 +46,7 @@ namespace BRCore
         SDL_RenderClear( m_renderer );           
         auto offset = camera.GetOffset();
 
-        for (auto fillRect : rects)
+        for (auto &fillRect : rects)
         {
             SDL_Rect rect;
             rect.x = fillRect->x - offset.x;
@@ -57,7 +58,7 @@ namespace BRCore
             SDL_RenderFillRect(m_renderer, &rect);
         }
 
-        for (auto sprite : sprites)
+        for (auto &sprite : sprites)
         {
             SDL_Rect rect;
             rect.x = sprite->rect.x - offset.x;
@@ -65,7 +66,23 @@ namespace BRCore
             rect.w = sprite->rect.w;
             rect.h = sprite->rect.h;
 
-            SDL_RenderCopy(m_renderer, sprite->texture, NULL, &rect);
+            // Check if the sprite animation isn't null and play it.
+            // If no animation exists, check to see if we can render a static texture.
+            auto spriteAnimation = sprite->GetCurrentAnimation();
+            if (spriteAnimation)
+            {
+                //std::cout << "render animation" << std::endl;
+                auto animRect = spriteAnimation->GetAnimationRect(spriteAnimation->currentFrame);
+                SDL_RenderCopy(m_renderer, spriteAnimation->texture, &animRect, &rect);
+            }
+            else if (sprite->texture)
+            {
+                SDL_RenderCopy(m_renderer, sprite->texture, NULL, &rect);
+            }
+            else
+            {
+                //std::cout << "no animation to render" << std::endl;
+            }
         }
 
         SDL_RenderPresent(m_renderer);

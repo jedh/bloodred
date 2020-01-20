@@ -38,9 +38,11 @@
     <ClInclude Include="Include\Scenes\Scene.h" />
     <ClInclude Include="Include\Scenes\SceneManager.h" />
     <ClInclude Include="Include\Sprites\Sprite.h" />
+    <ClInclude Include="Include\Sprites\SpriteAnimation.h" />
     <ClInclude Include="Include\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Include\Sprites\SpriteAnimation.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Display\DisplayManager.cpp" />
     <ClCompile Include="Source\Engine\Engine.cpp" />

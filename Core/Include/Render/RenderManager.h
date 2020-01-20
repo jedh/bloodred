@@ -21,6 +21,7 @@ namespace BRCore
 		void ShutDown();
 		//void Draw(const std::shared_ptr<Camera> camera);
 		void Draw(const Camera& camera);
+		void UpdateAnimations(float deltaTime);
 		void AddFillRect(const std::shared_ptr<BRFillRect> fillRect);
 		void AddSprite(const std::shared_ptr<Sprite> sprite);
 		void RemoveSprite(const std::shared_ptr<Sprite> sprite);
@@ -32,6 +33,6 @@ namespace BRCore
 	private:
 		IRenderer* m_renderer;
 		std::list<std::shared_ptr<BRFillRect>> m_rects;
-		std::list<std::shared_ptr<Sprite>> m_sprites;		
+		std::list<std::shared_ptr<Sprite>> m_sprites;	
 	};
 }

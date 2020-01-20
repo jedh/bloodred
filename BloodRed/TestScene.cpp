@@ -1,5 +1,6 @@
 #include "TestScene.h"
 #include <Eigen/Dense>
+#include <Sprites/SpriteAnimation.h>
 
 namespace BRGame
 {
@@ -13,11 +14,19 @@ namespace BRGame
 		m_rect = std::make_shared<BRCore::BRFillRect>(m_position.x, m_position.y, 100, 100, color);
 		m_rendering->AddFillRect(m_rect);
 
-		auto texture = m_rendering->GetTexture("../Resources/ball.png");
+		auto texture = m_rendering->GetTexture("Resources/ball.png");
 		if (texture != NULL)
 		{
 			m_sprite = std::make_shared<BRCore::Sprite>(BRCore::BRRect(100, 100, 100, 100), texture);
 			m_rendering->AddSprite(m_sprite);
+
+			auto sheetTexture = m_rendering->GetTexture("Resources/square-shimmer-sheet.png");
+			if (sheetTexture != NULL)
+			{
+				auto spriteAnimation = std::make_unique<BRCore::SpriteAnimation>(sheetTexture, "square-shimmer", 7);
+				m_sprite->AddAnimation(std::move(spriteAnimation));
+				m_sprite->PlayAnimation("square-shimmer", true, 100);
+			}
 		}
 	}
 
